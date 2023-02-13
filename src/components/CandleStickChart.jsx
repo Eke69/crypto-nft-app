@@ -7,7 +7,6 @@ import ChartButtons from './ChartButtons';
 const CandleStickChart = ({coin}) => {
     const [ historicalData, setHistoricalData ] = useState();
     const [ days, setDays ] = useState(1);
-    const [_, setFlag] = useState(false);
       
       const formatData = (data) => {
         let previousClose = data[0][1];
@@ -28,7 +27,6 @@ const CandleStickChart = ({coin}) => {
 
     const fetchHistoricData = useCallback(async () => {
         const { data } = await axios.get(HistoricalChart(coin.id, days, 'USD'));
-        setFlag(true);
         setHistoricalData(data.prices);
       }, [coin.id, days])
     
@@ -40,7 +38,7 @@ const CandleStickChart = ({coin}) => {
   
   return (
     <div>
-        <ChartButtons setDays={setDays} setFlag={setFlag} days={days} />
+        <ChartButtons setDays={setDays} days={days} />
          <VictoryChart
     width={350}
         height={300}
