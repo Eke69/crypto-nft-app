@@ -7,7 +7,7 @@ import ChartButtons from './ChartButtons';
 const CandleStickChart = ({coin}) => {
     const [ historicalData, setHistoricalData ] = useState();
     const [ days, setDays ] = useState(1);
-    const [flag, setFlag] = useState(false);
+    const [_, setFlag] = useState(false);
       
       const formatData = (data) => {
         let previousClose = data[0][1];
