@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
 import './App.css';
+import { theme } from './utils/theme';
+import AnimatedRoutes from './components/AnimatedRoutes';
+
+const StyledBox = styled(Box)`
+  background-color: #0E0E18;
+  color: #ffffff;
+  min-height: 100vh;
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+    <Router>
+    <StyledBox>
+      <AnimatedRoutes/>
+    </StyledBox>
+    </Router>
+    </ThemeProvider>
   );
 }
 
