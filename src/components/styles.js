@@ -34,7 +34,8 @@ padding: 10px;
 border-radius: 20px;
 color: white;
 display: flex;
-justify-content: space-between
+justify-content: space-between;
+background-color: "#2d2d35"
 `;
 
 export const StyledButtonBase = styled(Button)(({theme})=> ({

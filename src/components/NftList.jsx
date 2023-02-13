@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import image1 from '../assets/image-1.jpeg';
 import image2 from '../assets/image-2.jpeg';
 import image3 from '../assets/image-3.jpeg';
@@ -23,42 +24,13 @@ export const ProductCard = ({ image, price, time, onClick }) => (
     <NFTImage src={image} alt="product" />
     <PriceBox>
     <div style={{display: 'flex'}}> 
-        <img src={image4} alt="eth" height={'20px'} width={'20px'} style={{backgroundColor: 'transparent'}}/>
-        <span>{price.toFixed(2)}</span>
+        <img src={image4} alt="eth" height={'20px'} width={'20px'} style={{backgroundColor: 'transparent', marginRight: '2px'}}/>
+        <span>{typeof price === 'number' ? price.toFixed(2) : ''}</span>
     </div>
     <div style={{color: 'grey'}}>{formattedTime(time)}</div>
     </PriceBox>
   </div>
 );
-
-// const NftList = () => {
-//     const products = React.useMemo(() => 
-//     Array.from({ length: 50 }).map(() => ({
-//       image: stockImages[Math.floor(Math.random() * stockImages.length)],
-//       price: Math.random() * 1.5,
-//       time: new Date() 
-//     }))
-//   , []);
-
-//     useEffect(() => {
-//         const interval = setInterval(() => {
-//           products.forEach((product, index) => {
-//             products[index].time = new Date(product.time.getTime() + 1000);
-//           });
-//         }, 1000);
-//         return () => clearInterval(interval);
-//       }, [products]);
-
-//       const navigate = useNavigate();
-  
-//     return (
-//       <div style={{marginTop: '10px'}}>
-//         {products.map((product, index) => (
-//           <ProductCard key={index} image={product.image} price={product.price} time={product.time} onClick={()=> navigate()} />
-//         ))}
-//       </div>
-//     );
-//   };
 
 const NftList = () => {
     const [products, setProducts] = useState(
@@ -68,6 +40,8 @@ const NftList = () => {
         time: new Date(Date.now() + Math.random() * 1000000000)
       }))
     );
+
+    const navigate = useNavigate();
   
     useEffect(() => {
       const interval = setInterval(() => {
@@ -84,7 +58,9 @@ const NftList = () => {
     return (
       <div>
         {products.map((product, index) => (
-          <ProductCard key={index} image={product.image} price={product.price} time={product.time} />
+          <ProductCard key={index} image={product.image} price={product.price} time={product.time} onClick={()=> navigate('/nft/index', {
+            state: {product: product}
+          })} />
         ))}
       </div>
     );
